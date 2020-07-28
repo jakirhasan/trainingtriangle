@@ -43,6 +43,7 @@ add_action( 'after_setup_theme', 'trainingtriangle_setup' );
 //Register widget area.
 if(!function_exists('trainingtriangle_widgets_init')):
     function trainingtriangle_widgets_init() {
+
         register_sidebar(array(
                 'name'          => esc_html__( 'Sidebar', 'trainingtriangle' ),
                 'id'            => 'sidebar',
@@ -52,7 +53,8 @@ if(!function_exists('trainingtriangle_widgets_init')):
                 'before_widget' => '<div id="%1$s" class="widget %2$s" >',
                 'after_widget'  => '</div>'
             )
-        );
+		);
+		
         register_sidebar(array(
             'name'          => esc_html__( 'Footer', 'trainingtriangle' ),
             'id'            => 'triangle-footer',
@@ -62,7 +64,8 @@ if(!function_exists('trainingtriangle_widgets_init')):
             'before_widget' => '<div class="bottom-widget"><div id="%1$s" class="widget %2$s" >',
             'after_widget'  => '</div></div>'
             )
-        );
+		);
+		
     }
     add_action('widgets_init','trainingtriangle_widgets_init');
 endif;
@@ -71,6 +74,7 @@ endif;
 if(!function_exists('trainingtriangle_style')):
 
     function trainingtriangle_style(){
+
         wp_enqueue_style( 'default-google-font', '//fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700' );
         # CSS
         wp_enqueue_style( 'trainingtriangle-main', TRAININGTRIANGLE_CSS . 'main.css',false,'all');
@@ -78,11 +82,8 @@ if(!function_exists('trainingtriangle_style')):
 		
         # JS
         wp_enqueue_script('trainingtriangle-main',TRAININGTRIANGLE_JS.'main.js',array(),false,true);
-
-        # Single Comments
-        if ( is_singular() ) { wp_enqueue_script( 'comment-reply' ); }
-
-    }
+	
+	}
     add_action('wp_enqueue_scripts','trainingtriangle_style');
 
 endif;
@@ -101,6 +102,4 @@ function trainingtriangle_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'trainingtriangle_body_classes' );
-
-
 require TRAININGTRIANGLE_DIR . '/inc/core-function.php';
